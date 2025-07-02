@@ -1,3 +1,53 @@
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force-response: true
+  address: 0.0.0.0
+  http2:
+    enabled: true
+
 spring:
   application:
     name: rag-api-demo
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: public
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/ragdb
+    username: rag
+    password: ragpass
+
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+  ai:
+    vectorstore:
+      qdrant:
+        host: localhost
+        port: 6334
+        use-tls: false
+        initialize-schema: true
+
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: gemma2:2b-instruct-q4_0
+      embedding:
+        model: nomic-embed-text
+
+logging:
+  level:
+    org.springframework.ai: DEBUG
+    io.qdrant: DEBUG
+    root: INFO
