@@ -47,15 +47,22 @@ public class UserController {
   }
 
   @PostMapping
-  public ResponseEntity<User> createUser(@RequestBody User user) {
-    User savedUser = userRepository.save(user);
+  public ResponseEntity<User> createUser(@RequestBody UserDto user) {
+    User savedUser = userRepository.save(
+        User.builder()
+            .address(user.getAddress())
+            .email(user.getEmail())
+            .name(user.getName())
+            .age(user.getAge())
+            .build()
+    );
     // 새 사용자 자동 임베딩
     userEmbeddingService.embedUser(savedUser.getId());
     return ResponseEntity.ok(savedUser);
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
+  public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserDto user) {
     return userRepository.findById(id)
         .map(existingUser -> {
           existingUser.setName(user.getName());
