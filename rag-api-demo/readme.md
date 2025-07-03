@@ -30,7 +30,6 @@ src/
 │   │       │   ├── RagDetails.java            # RAG 세부 정보 모델
 │   │       │   └── dto/
 │   │       │       ├── RagQueryRequest.java   # 질의 요청 DTO
-│   │       │       └── RagFilteredRequest.java# 필터 질의 DTO
 │   │       ├── user/
 │   │       │   ├── User.java                  # 사용자 엔티티
 │   │       │   ├── UserController.java        # 사용자 관련 API
